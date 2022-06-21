@@ -16,28 +16,18 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    @NotEmpty(message = "Введите имя")
-    @Size(min = 2, max = 30, message = "Имя должно содержать от 2 до 30 символов")
     private String name;
     @Column(name = "last_name")
-    @NotEmpty(message = "Введите фамилию")
-    @Size(min = 2, max = 30, message = "Фамилия должно содержать от 2 до 30 символов")
     private String lastName;
     @Column
-    @NotNull(message = "Введите возраст")
-    @Min(value = 0, message = "Возраст не может быть отрицательным")
-    @Max(value = 127, message = "Возраст превышает максимальный предел")
     private Byte age;
 
     @Column
-    @NotEmpty(message = "Введите email")
-    @Email(message="Email введен некоректно")
     private String email;
     @Column
-    //@NotEmpty(message = "Введите пароль")
     private String password;
     @Column
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles;
 
     public User() { }
@@ -141,4 +131,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
