@@ -25,6 +25,7 @@ import java.util.Set;
 
 
 @Controller
+@RequestMapping
 public class UserController {
 
     private final UserService userService;
@@ -40,31 +41,11 @@ public class UserController {
         return "/login";
     }
     @GetMapping("/admin/")
-    public String adminPage(@ModelAttribute("useradd") User user, Model model) {
-        model.addAttribute("listusers", userService.getAllUsers());
-        model.addAttribute("rolelist", roleService.getAllRole());
-
+    public String adminPage(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User userauth = (User) authentication.getPrincipal();
         model.addAttribute("userauth", userauth);
         return "/admin/index";
-    }
-    @PatchMapping("/admin/{id}")
-    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") Long id,
-                             @RequestParam("rolesSelected") Long[] rolesId) {
-        user.setRoles(roleService.findByIdIn(Arrays.stream(rolesId).toList()));
-        userService.updateUser(user, id);
-        return "redirect:/admin/";
-    }
-    @DeleteMapping("/admin/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-        userService.removeUser(id);
-        return "redirect:/admin/";
-    }
-    @PostMapping("/admin/new")
-    public String createUser(@ModelAttribute("useradd") User user) {
-        userService.addUser(user);
-        return "redirect:/admin/";
     }
 
     @GetMapping("/user/")

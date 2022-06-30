@@ -1,5 +1,7 @@
 package com.example.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -93,8 +95,8 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public String getStringRole() {
-        return getRoles().stream().map(r -> r.getName().substring(5)).collect(Collectors.joining(" "));
+    public String getShortRoles() {
+        return getRoles().stream().map(r -> r.getName().substring(5)).sorted().collect(Collectors.joining(" "));
     }
 
     @Override

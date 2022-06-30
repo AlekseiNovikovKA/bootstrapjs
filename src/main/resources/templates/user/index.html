@@ -17,7 +17,7 @@
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <div class="mx-3 navbar-text text-white">
         <span class="font-weight-bold" th:text="${userauth.email}"></span>
-        <span th:text="| with roles: ${userauth.getStringRole()}|"></span>
+        <span th:text="| with roles: ${userauth.getShortRoles()}|"></span>
     </div>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -61,7 +61,7 @@
                                 <td class="align-middle" th:utext="${userauth.lastName}">...</td>
                                 <td class="align-middle" th:utext="${userauth.age}">...</td>
                                 <td class="align-middle" th:utext="${userauth.email}">...</td>
-                                <td class="align-middle" th:utext="${userauth.getStringRole()}">...</td>
+                                <td class="align-middle" th:utext="${userauth.getShortRoles()}">...</td>
                             </tr>
                             </tbody>
                         </table>
